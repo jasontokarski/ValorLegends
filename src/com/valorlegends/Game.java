@@ -1,16 +1,17 @@
-package com.jason.tiledgame;
+package com.valorlegends;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import com.jason.tiledgame.display.Display;
+import com.valorlegends.display.Display;
+import com.valorlegends.graphics.Assets;
 
 public class Game implements Runnable {
+	private static final int numBuffers = 3;
 	private Display display;
 	public int width, height;
 	public String title;
 	private Thread thread;
-	private static final int numBuffers = 3;
 	
 	//Variable to check if our game is running
 	boolean running = false;
@@ -29,6 +30,7 @@ public class Game implements Runnable {
 	
 	private void init() {
 		display = new Display(title, width, height);
+		Assets.loadAssets();
 	}
 	
 	//Check if our game is running, if not start it
@@ -49,7 +51,6 @@ public class Game implements Runnable {
 			tick();
 			render();
 		}
-		
 		stop();
 	}
 	
@@ -79,9 +80,13 @@ public class Game implements Runnable {
 		//Create our graphics object for drawing
 		g = bs.getDrawGraphics();
 		
-		//Begin Drawing
-		//Fill a rectangle the size of our canvas
-		g.fillRect(0, 0, width, height);
+		//Clear our entire screen
+		g.clearRect(0, 0, width, height);
+		
+		//Start Drawing
+		
+		//Display our player sprite
+		g.drawImage(Assets.player, 25, 25, null);
 		
 		//End Drawing
 		

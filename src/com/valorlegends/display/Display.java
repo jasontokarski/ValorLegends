@@ -1,4 +1,4 @@
-package com.jason.tiledgame.display;
+package com.valorlegends.display;
 
 import java.awt.Canvas;
 import java.awt.Dimension;

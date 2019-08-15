@@ -1,4 +1,4 @@
-package com.jason.tiledgame;
+package com.valorlegends;
 
 public class Launcher {
 	public static void main(String[] args) {
