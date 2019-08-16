@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 
 import com.valorlegends.display.Display;
 import com.valorlegends.graphics.Assets;
+import com.valorlegends.util.FpsTimer;
 
 public class Game implements Runnable {
 	private static final int numBuffers = 3;
@@ -12,6 +13,8 @@ public class Game implements Runnable {
 	public int width, height;
 	public String title;
 	private Thread thread;
+	public FpsTimer fpsTimer;
+	int x = 0;
 	
 	//Variable to check if our game is running
 	boolean running = false;
@@ -46,10 +49,16 @@ public class Game implements Runnable {
 	
 	public void run() {
 		init();
+		fpsTimer = new FpsTimer(60);
 		//Game loop will continually update variables and display images
 		while(running) {
-			tick();
-			render();
+			fpsTimer.update();
+			//If delta is greater than one, then we can tick and render to match
+			//60 frames per second
+			if(fpsTimer.check()) {
+				tick();
+				render();
+			}
 		}
 		stop();
 	}
@@ -86,7 +95,7 @@ public class Game implements Runnable {
 		//Start Drawing
 		
 		//Display our player sprite
-		g.drawImage(Assets.player, 25, 25, null);
+		g.drawImage(Assets.player, x, 25, null);
 		
 		//End Drawing
 		
@@ -97,7 +106,7 @@ public class Game implements Runnable {
 	}
 	
 	private void tick() {
-		
+		x += 1;
 	}
 
 }
