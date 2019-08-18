@@ -3,17 +3,20 @@ package com.valorlegends.states;
 import java.awt.Graphics;
 
 import com.valorlegends.display.Display;
+import com.valorlegends.entity.Player;
 import com.valorlegends.graphics.Assets;
 
 public class GameState extends State {
 
+	private Player player;
+	
 	public GameState() {
-		
+		player = new Player(50, 50);
 	}
 	
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
+		player.tick();
 		
 	}
 
@@ -26,7 +29,7 @@ public class GameState extends State {
 			}
 		}
 		
-		g.drawImage(Assets.player, 50, 50, null);
+		player.render(g);
 	}
 
 }
