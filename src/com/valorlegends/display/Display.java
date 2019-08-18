@@ -13,8 +13,9 @@ public class Display {
 	private Canvas canvas;
 	
 	private String title;
-	private int width;
-	private int height;
+	public static int width;
+	public static int height;
+	public static int tileSize = 32;
 	
 	public Display(String title, int width, int height) {
 		this.title = title;

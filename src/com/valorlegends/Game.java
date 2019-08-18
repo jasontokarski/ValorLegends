@@ -5,6 +5,8 @@ import java.awt.image.BufferStrategy;
 
 import com.valorlegends.display.Display;
 import com.valorlegends.graphics.Assets;
+import com.valorlegends.states.GameState;
+import com.valorlegends.states.State;
 import com.valorlegends.util.FpsTimer;
 
 public class Game implements Runnable {
@@ -14,7 +16,6 @@ public class Game implements Runnable {
 	public String title;
 	private Thread thread;
 	public FpsTimer fpsTimer;
-	int x = 0;
 	
 	//Variable to check if our game is running
 	boolean running = false;
@@ -25,6 +26,8 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
+	private State gameState;
+	
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -34,6 +37,8 @@ public class Game implements Runnable {
 	private void init() {
 		display = new Display(title, width, height);
 		Assets.loadAssets();
+		gameState = new GameState();
+		State.setState(gameState);
 	}
 	
 	//Check if our game is running, if not start it
@@ -95,9 +100,13 @@ public class Game implements Runnable {
 		//Start Drawing
 		
 		//Display our player sprite
-		g.drawImage(Assets.player, x, 25, null);
+		g.drawImage(Assets.player, 25, 25, null);
 		
 		//End Drawing
+		
+		if(State.getState() != null) {
+			State.getState().render(g);
+		}
 		
 		//Display our graphics buffer to the screen
 		bs.show();
@@ -106,7 +115,9 @@ public class Game implements Runnable {
 	}
 	
 	private void tick() {
-		x += 1;
+		if(State.getState() != null) {
+			State.getState().tick();
+		}
 	}
 
 }
