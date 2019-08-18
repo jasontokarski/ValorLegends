@@ -2,6 +2,7 @@ package com.valorlegends.states;
 
 import java.awt.Graphics;
 
+import com.valorlegends.Game;
 import com.valorlegends.display.Display;
 import com.valorlegends.entity.Player;
 import com.valorlegends.graphics.Assets;
@@ -10,8 +11,9 @@ public class GameState extends State {
 
 	private Player player;
 	
-	public GameState() {
-		player = new Player(50, 50);
+	public GameState(Game game) {
+		super(game);
+		player = new Player(game, 50, 50);
 	}
 	
 	@Override

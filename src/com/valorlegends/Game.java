@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 
 import com.valorlegends.display.Display;
 import com.valorlegends.graphics.Assets;
+import com.valorlegends.input.KeyManager;
 import com.valorlegends.states.GameState;
 import com.valorlegends.states.State;
 import com.valorlegends.util.FpsTimer;
@@ -17,6 +18,9 @@ public class Game implements Runnable {
 	private Thread thread;
 	public FpsTimer fpsTimer;
 	
+	//Input
+	private KeyManager keyManager;
+	
 	//Variable to check if our game is running
 	boolean running = false;
 	
@@ -26,6 +30,7 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
+	//States
 	private State gameState;
 	
 	public Game(String title, int width, int height) {
@@ -36,8 +41,11 @@ public class Game implements Runnable {
 	
 	private void init() {
 		display = new Display(title, width, height);
+		keyManager = new KeyManager();
+		//Get the frame of our frame and have an eventlistener listen for keys
+		display.getFrame().addKeyListener(keyManager);
 		Assets.loadAssets();
-		gameState = new GameState();
+		gameState = new GameState(this);
 		State.setState(gameState);
 	}
 	
@@ -82,6 +90,11 @@ public class Game implements Runnable {
 
 	}
 	
+	//Allow other classes to access our keymanager
+	public KeyManager getKeyManager() {
+		return keyManager;
+	}
+	
 	private void render() {
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null) {
@@ -99,9 +112,6 @@ public class Game implements Runnable {
 		
 		//Start Drawing
 		
-		//Display our player sprite
-		g.drawImage(Assets.player, 25, 25, null);
-		
 		//End Drawing
 		
 		if(State.getState() != null) {
@@ -115,6 +125,9 @@ public class Game implements Runnable {
 	}
 	
 	private void tick() {
+		//Keymanager must be ticked to receive input at any time
+		keyManager.tick();
+		
 		if(State.getState() != null) {
 			State.getState().tick();
 		}
