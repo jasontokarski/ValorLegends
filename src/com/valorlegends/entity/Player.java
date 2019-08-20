@@ -8,30 +8,37 @@ import com.valorlegends.graphics.Assets;
 public class Player extends LivingEntity {
 	private Game game;
 	
-	public Player(Game game, float x, float y) {
-		super(x, y);
+	public Player(Game game, float x, float y, int width, int height) {
+		super(x, y, width, height);
 		this.game = game;
 	}
 
 	@Override
 	public void tick() {
-		//y axis starts at the top left and moves down
-		if(game.getKeyManager().up) {
-			y -= 3;
-		}
-		if(game.getKeyManager().down) {
-			y += 3;
-		}
-		if(game.getKeyManager().left) {
-			x -= 3;
-		}
-		if(game.getKeyManager().right) {
-			x += 3;
-		}
+		getInput();
+		move();
 	}
 
+	private void getInput() {
+		xSpeed = 0;
+		ySpeed = 0;
+		
+		if(game.getKeyManager().up) {
+			ySpeed = -speed;
+		}
+		if(game.getKeyManager().down) {
+			ySpeed = speed;
+		}
+		if(game.getKeyManager().left) {
+			xSpeed = -speed;
+		}
+		if(game.getKeyManager().right) {
+			xSpeed = speed;
+		}
+	}
+	
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.player, (int)x, (int)y, null);
+		g.drawImage(Assets.player, (int)x, (int)y, width, height, null);
 	}
 }

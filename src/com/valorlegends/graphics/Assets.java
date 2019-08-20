@@ -9,6 +9,8 @@ public class Assets {
 	
 	public static BufferedImage terrainTileset;
 	public static BufferedImage water;
+	public static BufferedImage grass;
+	public static BufferedImage stone;
 	public static BufferedImage playerSprites;
 	public static BufferedImage player;
 	
@@ -19,5 +21,7 @@ public class Assets {
 		SpriteSheet terrainSheet = new SpriteSheet(terrainTileset);
 		player = playerSheet.crop(0, 0, playerWidth, playerHeight);
 		water = terrainSheet.crop(0, 0,terrainWidth , terrainHeight);
+		grass = terrainSheet.crop(32, 0, terrainWidth, terrainWidth);
+		stone = terrainSheet.crop(64, 0, terrainWidth, terrainWidth);
 	}
 }
