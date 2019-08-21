@@ -11,6 +11,7 @@ public class Assets {
 	public static BufferedImage water;
 	public static BufferedImage grass;
 	public static BufferedImage stone;
+	public static BufferedImage sand;
 	public static BufferedImage playerSprites;
 	public static BufferedImage player;
 	
@@ -23,5 +24,6 @@ public class Assets {
 		water = terrainSheet.crop(0, 0,terrainWidth , terrainHeight);
 		grass = terrainSheet.crop(32, 0, terrainWidth, terrainWidth);
 		stone = terrainSheet.crop(64, 0, terrainWidth, terrainWidth);
+		sand = terrainSheet.crop(96, 0, terrainWidth, terrainWidth);
 	}
 }

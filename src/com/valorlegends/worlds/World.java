@@ -46,12 +46,14 @@ public class World {
 		spawnY = FileLoader.parseInt(tokens[3]);
 		
 		worldTiles = new int[width][height];
+		int tileIndex = 4;
 		
 		for(int y = 0; y < height; y++) {
 			for(int x = 0; x < width; x++) {
-				worldTiles[x][y] = FileLoader.parseInt(tokens[(x + y) + 4]);
+				worldTiles[x][y] = FileLoader.parseInt(tokens[tileIndex++]);
 			}
 		}
 		
+		tileIndex = 0;
 	}
 }
