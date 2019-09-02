@@ -7,7 +7,7 @@ public class WaterTile extends Tile {
 		super(Assets.water, id);
 	}
 	
-	public boolean walkable() {
-		return false;
+	public boolean notWalkable() {
+		return true;
 	}
 }

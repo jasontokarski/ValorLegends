@@ -2,10 +2,8 @@ package com.valorlegends.states;
 
 import java.awt.Graphics;
 
-import com.valorlegends.Game;
-import com.valorlegends.display.Display;
 import com.valorlegends.entity.Player;
-import com.valorlegends.graphics.Assets;
+import com.valorlegends.util.Handler;
 import com.valorlegends.worlds.World;
 
 public class GameState extends State {
@@ -13,10 +11,11 @@ public class GameState extends State {
 	private Player player;
 	private World world;
 	
-	public GameState(Game game) {
-		super(game);
-		player = new Player(game, 50, 50, 32, 32);
-		world = new World("res/worlds/world1.lvl");
+	public GameState(Handler handler) {
+		super(handler);
+		world = new World(handler, "res/worlds/world1.lvl");
+		handler.setWorld(world);
+		player = new Player(handler, 320, 550);
 	}
 	
 	@Override

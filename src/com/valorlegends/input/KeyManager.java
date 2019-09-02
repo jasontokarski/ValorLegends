@@ -11,6 +11,7 @@ public class KeyManager implements KeyListener {
 	
 	//Tick is called many times per second
 	public void tick() {
+		//If w,a,s,d is pressed save that keyevent as the index of the keys and up will be equal to true
 		up = keys[KeyEvent.VK_W];
 		down = keys[KeyEvent.VK_S];
 		left = keys[KeyEvent.VK_A];

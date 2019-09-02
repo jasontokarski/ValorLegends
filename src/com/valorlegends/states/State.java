@@ -2,7 +2,7 @@ package com.valorlegends.states;
 
 import java.awt.Graphics;
 
-import com.valorlegends.Game;
+import com.valorlegends.util.Handler;
 
 public abstract class State {
 	
@@ -17,10 +17,10 @@ public abstract class State {
 		currentState = state;
 	}
 	
-	protected Game game;
+	protected Handler handler;
 	
-	public State(Game game) {
-		this.game = game;
+	public State(Handler handler) {
+		this.handler = handler;
 	}
 	
 	public abstract void tick();

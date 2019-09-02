@@ -31,8 +31,8 @@ public class Tile {
 		g.drawImage(texture, x, y, TILE_WIDTH, TILE_HEIGHT, null);
 	}
 	
-	public boolean walkable() {
-		return true;
+	public boolean notWalkable() {
+		return false;
 	}
 	
 	public int getId() {

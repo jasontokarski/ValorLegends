@@ -1,16 +1,20 @@
 package com.valorlegends.entity;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
-import com.valorlegends.Game;
 import com.valorlegends.graphics.Assets;
+import com.valorlegends.util.Handler;
 
 public class Player extends LivingEntity {
-	private Game game;
 	
-	public Player(Game game, float x, float y, int width, int height) {
-		super(x, y, width, height);
-		this.game = game;
+	public Player(Handler handler, float x, float y) {
+		super(handler, x, y, LivingEntity.DEFAULT_LIVING_ENT_WIDTH, LivingEntity.DEFAULT_LIVING_ENT_HEIGHT);
+		//The collision box should be 0 pixels from the edge in both the x and y directions.
+		bounds.x = 0;
+		bounds.y = 0;
+		bounds.width = 29;
+		bounds.height = 31;
 	}
 
 	@Override
@@ -20,25 +24,27 @@ public class Player extends LivingEntity {
 	}
 
 	private void getInput() {
-		xSpeed = 0;
-		ySpeed = 0;
+		xMove = 0;
+		yMove = 0;
 		
-		if(game.getKeyManager().up) {
-			ySpeed = -speed;
+		if(handler.getKeyManager().up) {
+			yMove = -speed;
 		}
-		if(game.getKeyManager().down) {
-			ySpeed = speed;
+		if(handler.getKeyManager().down) {
+			yMove = speed;
 		}
-		if(game.getKeyManager().left) {
-			xSpeed = -speed;
+		if(handler.getKeyManager().left) {
+			xMove = -speed;
 		}
-		if(game.getKeyManager().right) {
-			xSpeed = speed;
+		if(handler.getKeyManager().right) {
+			xMove = speed;
 		}
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.player, (int)x, (int)y, width, height, null);
+		//g.setColor(Color.RED);
+		//g.fillRect((int)x + bounds.x, (int) y + bounds.y, bounds.width, bounds.height);
 	}
 }

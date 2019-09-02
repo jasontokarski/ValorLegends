@@ -9,6 +9,7 @@ import com.valorlegends.input.KeyManager;
 import com.valorlegends.states.GameState;
 import com.valorlegends.states.State;
 import com.valorlegends.util.FpsTimer;
+import com.valorlegends.util.Handler;
 
 public class Game implements Runnable {
 	private static final int numBuffers = 3;
@@ -33,6 +34,8 @@ public class Game implements Runnable {
 	//States
 	private State gameState;
 	
+	private Handler handler;
+	
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -45,7 +48,8 @@ public class Game implements Runnable {
 		//Get the frame of our frame and have an eventlistener listen for keys
 		display.getFrame().addKeyListener(keyManager);
 		Assets.loadAssets();
-		gameState = new GameState(this);
+		handler = new Handler(this);
+		gameState = new GameState(handler);
 		State.setState(gameState);
 	}
 	

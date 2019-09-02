@@ -20,10 +20,12 @@ public class Assets {
 		terrainTileset = ImageLoader.loadImage("/textures/TerrainTileset.png");
 		SpriteSheet playerSheet = new SpriteSheet(playerSprites);
 		SpriteSheet terrainSheet = new SpriteSheet(terrainTileset);
+		
+		//Extract our tile from our sprite sheet as a BufferedImage
 		player = playerSheet.crop(0, 0, playerWidth, playerHeight);
 		water = terrainSheet.crop(0, 0,terrainWidth , terrainHeight);
-		grass = terrainSheet.crop(32, 0, terrainWidth, terrainWidth);
-		stone = terrainSheet.crop(64, 0, terrainWidth, terrainWidth);
-		sand = terrainSheet.crop(96, 0, terrainWidth, terrainWidth);
+		grass = terrainSheet.crop(32, 0, terrainWidth, terrainHeight);
+		stone = terrainSheet.crop(64, 0, terrainWidth, terrainHeight);
+		sand = terrainSheet.crop(96, 0, terrainWidth, terrainHeight);
 	}
 }
